@@ -271,12 +271,7 @@ class RolloutWorker(EvaluatorInterface):
         self._fake_sampler = _fake_sampler
 
         self.env = _validate_env(env_creator(env_context))
-        if isinstance(self.env, MultiAgentEnv) or \
-                isinstance(self.env, BaseEnv):
-
-            def wrap(env):
-                return env  # we can't auto-wrap these env types
-        elif is_atari(self.env) and \
+        if is_atari(self.env) and \
                 not model_config.get("custom_preprocessor") and \
                 preprocessor_pref == "deepmind":
 
